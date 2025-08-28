@@ -1,18 +1,21 @@
 <?php
 
+use App\Http\Resources\CommentResource;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\UserResource;
 use App\Livewire\PostIndex;
-use App\Livewire\Comment;
+use App\Livewire\CommentIndex;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
+use App\Models\Comment;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
-
-Route::get('posts', PostIndex::class)->name('posts.index');
-Route::get('comments', Comment::class)->name('comments');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -25,6 +28,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/password', Password::class)->name('settings.password');
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
+
+Route::get('posts', PostIndex::class)->name('posts.index');
+Route::get('comments', CommentIndex::class)->name('comments.index');
 
 
 require __DIR__.'/auth.php';

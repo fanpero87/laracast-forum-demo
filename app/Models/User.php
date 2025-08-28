@@ -60,17 +60,11 @@ class User extends Authenticatable
             ->implode('');
     }
 
-    /**
-     * @return HasMany<Post,User>
-     */
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
 
-    /**
-     * @return HasMany<Comment,User>
-     */
     public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);

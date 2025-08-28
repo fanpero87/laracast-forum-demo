@@ -4,10 +4,10 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class Comment extends Component
+class CommentIndex extends Component
 {
     public function render()
     {
-        return view('livewire.comment');
+        return view('livewire.comment-index');
     }
 }

@@ -2,18 +2,21 @@
 
 namespace App\Livewire;
 
+use App\Http\Resources\PostResource;
 use App\Models\Post;
+use Livewire\Attributes\Computed;
+use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 
 #[Layout('components.layouts.guest')]
 class PostIndex extends Component
 {
-    public function render(){
-        $posts = Post::with(['user', 'comments.user'])
-            ->orderBy('created_at', 'desc')
-            ->get();
+    use WithPagination;
 
-        return view('livewire.post-index', ['posts'=> $posts]);
+    #[Computed]
+    public function posts()
+    {
+        return PostResource::collection(Post::paginate(10));
     }
 }

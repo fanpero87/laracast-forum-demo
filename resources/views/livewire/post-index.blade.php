@@ -1,7 +1,11 @@
-<div class="flex flex-col gap-6">
-    <ul>
-        @foreach($posts as $post)
-         <li>{{ $post->title }}</li>
+<div class="">
+    <ul class="flex-col p-4 space-y-6">
+        @foreach($this->posts as $post)
+         <li>
+            <span class="font-semibold text-lg">{{ $post->title }}</span>
+        </li>
         @endforeach
      </ul>
+
+    {{ $this->posts->links() }}
 </div>
