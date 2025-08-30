@@ -1,9 +1,9 @@
 <?php
 
-use App\Livewire\Comment;
+use App\Livewire\CommentIndex;
 use Livewire\Livewire;
 
 it('renders successfully', function () {
-    Livewire::test(Comment::class)
+    Livewire::test(CommentIndex::class)
         ->assertStatus(200);
 });

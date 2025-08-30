@@ -1,16 +1,11 @@
 <?php
 
-use App\Http\Resources\CommentResource;
-use App\Http\Resources\PostResource;
-use App\Http\Resources\UserResource;
-use App\Livewire\PostIndex;
-use App\Livewire\CommentIndex;
-use App\Livewire\Settings\Appearance;
-use App\Livewire\Settings\Password;
+use App\Livewire\Posts\PostShow;
+use App\Livewire\Posts\PostIndex;
 use App\Livewire\Settings\Profile;
-use App\Models\Comment;
-use App\Models\Post;
-use App\Models\User;
+use App\Livewire\Settings\Password;
+
+use App\Livewire\Settings\Appearance;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -30,7 +25,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('posts', PostIndex::class)->name('posts.index');
-Route::get('comments', CommentIndex::class)->name('comments.index');
+Route::get('posts/{post}', PostShow::class)->name('posts.show');
 
 
-require __DIR__.'/auth.php';
+
+require __DIR__ . '/auth.php';
