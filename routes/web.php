@@ -2,6 +2,8 @@
 
 use App\Livewire\Posts\PostShow;
 use App\Livewire\Posts\PostIndex;
+use App\Livewire\Comments\CommentStore;
+
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\Password;
 
@@ -11,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+
+Route::get('posts', PostIndex::class)->name('posts.index');
+Route::get('posts/{post}', PostShow::class)->name('posts.show');
+
+Route::get('/posts/{post}/comments', CommentStore::class)->name('posts.comments.store')->middleware(['auth', 'verified']);
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -23,10 +30,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/password', Password::class)->name('settings.password');
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
 });
-
-Route::get('posts', PostIndex::class)->name('posts.index');
-Route::get('posts/{post}', PostShow::class)->name('posts.show');
-
-
 
 require __DIR__ . '/auth.php';

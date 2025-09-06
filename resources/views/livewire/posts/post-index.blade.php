@@ -1,12 +1,17 @@
-<div class="">
-     <h1 class="text-2xl font-bold">Posts</h1>
-    <ul class="flex-col p-4 space-y-6">
+<div>
+    <h1 class="text-2xl font-bold">Posts</h1>
+    <ul class="p-4 divide-y">
         @foreach($this->posts as $post)
-         <li>
-            <span class="text-lg font-semibold">{{ $post->title }}</span>
+        <li wire:key="{{ $post->id }}" class="px-2 py-4">
+            <flux:link :href="route('posts.show', ['post'=>$post->id])" wire:navigate>
+                <span class="text-lg font-bold group-hover:underline">{{ $post->title }}</span>
+                <span class="text-xs text-zinc-600 dark:text-white">{{ $post->created_at->diffForHumans() }} by {{
+                    $post->user->name }}</span>
+            </flux:link>
         </li>
         @endforeach
-     </ul>
-
-    {{ $this->posts->links() }}
+    </ul>
+    <div class="p-4">
+        {{ $this->posts->links() }}
+    </div>
 </div>
