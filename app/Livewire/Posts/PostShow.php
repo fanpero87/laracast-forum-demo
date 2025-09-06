@@ -7,6 +7,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\CommentResource;
 
@@ -32,5 +33,12 @@ class PostShow extends Component
                 ->latest()
                 ->paginate(2)
         );
+    }
+    
+    #[On('comment-added')]
+    public function refreshComments()
+    {
+        // This will trigger a re-render of the comments
+        unset($this->comments);
     }
 }
