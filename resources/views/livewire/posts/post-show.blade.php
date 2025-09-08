@@ -15,13 +15,38 @@
         <ul class="p-4 divide-y">
             @foreach ($this->comments as $comment)
             <li class="grid px-2 py-4" wire:key="comment-{{ $comment->id }}">
-                <span class="text-zinc-600 dark:text-white/70">{{ $comment->body }}</span>
-                <span class="text-xs text-zinc-600 dark:text-white/70">By {{ $comment->user->name }} {{ $comment->created_at->diffForHumans() }}</span>
+                <div class="flex items-start justify-between">
+                    <div class="flex-1">
+                        <span class="text-zinc-600 dark:text-white/70">{{ $comment->body }}</span>
+                        <span class="block mt-1 text-xs text-zinc-600 dark:text-white/70">By {{ $comment->user->name }}
+                            {{
+                            $comment->created_at->diffForHumans() }}</span>
+                    </div>
+                    @can('update', $comment->resource)
+                    <div class="ml-2">
+                        <livewire:comments.comment-update :comment="$comment->resource"
+                            wire:key="delete-{{ $comment->resource->id }}" />
+                    </div>
+                    @endcan
+                    @can('delete', $comment->resource)
+                    <div class="ml-2">
+                        <livewire:comments.comment-delete :comment="$comment->resource"
+                            wire:key="delete-{{ $comment->resource->id }}" />
+                    </div>
+                    @endcan
+
+
+
+                </div>
             </li>
+
             @endforeach
         </ul>
 
         {{ $this->comments->links() }}
+
+
     </div>
+
 
 </div>
