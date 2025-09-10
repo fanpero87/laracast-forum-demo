@@ -31,11 +31,12 @@ class PostShow extends Component
             $this->post->comments()
                 ->with('user')
                 ->latest()
-                ->paginate(5)
+                ->paginate(20)
         );
     }
 
     #[On('comment-added')]
+    #[On('comment-updated')]
     #[On('comment-deleted')]
     public function refreshComments()
     {

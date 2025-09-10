@@ -13,12 +13,7 @@ class CommentUpdate extends Component
 
     public function update()
     {
-
-        $this->authorize('update', $this->comment);
-
-        $this->comment->update();
-
-        // Dispatch an event to refresh comments on the parent component
-        $this->dispatch('comment-updated');
+        // Dispatch event to load the comment into edit mode
+        $this->dispatch('edit-comment', comment: $this->comment);
     }
 }

@@ -23,20 +23,17 @@
                             $comment->created_at->diffForHumans() }}</span>
                     </div>
                     @can('update', $comment->resource)
-                    <div class="ml-2">
-                        <livewire:comments.comment-update :comment="$comment->resource"
-                            wire:key="delete-{{ $comment->resource->id }}" />
-                    </div>
+                        <div class="ml-2">
+                            <livewire:comments.comment-update :comment="$comment->resource"
+                                wire:key="update-{{ $comment->resource->id }}" />
+                        </div>
                     @endcan
                     @can('delete', $comment->resource)
-                    <div class="ml-2">
-                        <livewire:comments.comment-delete :comment="$comment->resource"
-                            wire:key="delete-{{ $comment->resource->id }}" />
-                    </div>
+                        <div class="ml-2">
+                            <livewire:comments.comment-delete :comment="$comment->resource"
+                                wire:key="delete-{{ $comment->resource->id }}" />
+                        </div>
                     @endcan
-
-
-
                 </div>
             </li>
 
