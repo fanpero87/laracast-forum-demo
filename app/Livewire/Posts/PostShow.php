@@ -18,6 +18,11 @@ class PostShow extends Component
 
     public Post $post;
 
+    public function mount(Post $post)
+    {
+        $this->post = $post;
+    }
+
     #[Computed]
     public function post()
     {
