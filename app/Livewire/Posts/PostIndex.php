@@ -17,6 +17,8 @@ class PostIndex extends Component
     #[Computed]
     public function posts()
     {
-        return PostResource::collection(Post::paginate(10));
+        return PostResource::collection(
+            Post::latest()->paginate(10)
+        );
     }
 }

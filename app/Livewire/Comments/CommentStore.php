@@ -2,8 +2,9 @@
 
 namespace App\Livewire\Comments;
 
-use Livewire\Component;
+use App\Models\Post;
 use App\Models\Comment;
+use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Auth;
@@ -11,37 +12,55 @@ use Illuminate\Support\Facades\Auth;
 class CommentStore extends Component
 {
     #[Validate('required|string|min:5|max:1000')]
-    public $body;
+    public $body = '';
 
-    public $post;
+    public Post $post;
 
-    public $commentBeingEdited;
+    public ?int $commentBeingEdited = null;
 
-    public function store()
+    public bool $showIndicator = false;
+
+    public string $message = '';
+
+
+    public function store(): void
     {
         $this->validate();
 
         if ($this->commentBeingEdited) {
-            $comment = Comment::findOrFail($this->commentBeingEdited);
-
-            $this->authorize('update', $comment);
-
-            $comment->update([
-                'body' => $this->body,
-            ]);
-
-            $this->dispatch('comment-updated');
+            $this->updateComment();
         } else {
-            Comment::create([
-                'body' => $this->body,
-                'user_id' => Auth::id(),
-                'post_id' => $this->post->id,
-            ]);
-
-            $this->dispatch('comment-added');
+            $this->createComment();
         }
 
+        $this->showIndicator = true;
         $this->reset(['body', 'commentBeingEdited']);
+    }
+
+    private function createComment(): void
+    {
+        Comment::create([
+            'body' => $this->body,
+            'user_id' => Auth::id(),
+            'post_id' => $this->post->id,
+        ]);
+
+        $this->message = 'Comment added successfully!';
+        $this->dispatch('comment-added');
+    }
+
+    private function updateComment(): void
+    {
+        $comment = Comment::findOrFail($this->commentBeingEdited);
+
+        $this->authorize('update', $comment);
+
+        $comment->update([
+            'body' => $this->body,
+        ]);
+
+        $this->message = 'Comment updated successfully!';
+        $this->dispatch('comment-updated');
     }
 
     #[On('edit-comment')]

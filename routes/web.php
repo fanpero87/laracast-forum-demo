@@ -2,13 +2,15 @@
 
 use App\Livewire\Posts\PostShow;
 use App\Livewire\Posts\PostIndex;
+use App\Livewire\Posts\PostStore;
+
 use App\Livewire\Comments\CommentStore;
 use App\Livewire\Comments\CommentDelete;
 
 use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\Password;
-
 use App\Livewire\Settings\Appearance;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,11 +19,11 @@ Route::get('/', function () {
 
 Route::get('posts', PostIndex::class)->name('posts.index');
 Route::get('posts/{post}', PostShow::class)->name('posts.show');
+Route::get('post/create', PostStore::class)->name('posts.store');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/posts/{post}/comments', CommentStore::class)->name('posts.comments.store');
-
-    Route::delete('/posts/{post}/comments/{comment}', CommentDelete::class)->name('posts.comments.delete');
+    Route::get('posts/{post}/comments', CommentStore::class)->name('posts.comments.store');
+    Route::delete('posts/{post}/comments/{comment}', CommentDelete::class)->name('posts.comments.delete');
 });
 
 
