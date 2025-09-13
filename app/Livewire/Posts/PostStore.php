@@ -18,6 +18,7 @@ class PostStore extends Component
 
     public function store()
     {
+        $this->authorize('create', Auth::id());
 
         $this->validate();
 
@@ -30,6 +31,6 @@ class PostStore extends Component
         $this->dispatch('post-added');
         $this->reset(['title', 'body']);
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.show', ['post' => Post::latest()->first()]);
     }
 }

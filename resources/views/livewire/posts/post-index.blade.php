@@ -1,4 +1,4 @@
-<div>
+<div class="container mx-auto mt-8">
     <h1 class="text-2xl font-bold">Posts</h1>
     <ul class="p-4 divide-y">
         @foreach($this->posts as $post)

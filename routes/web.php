@@ -17,15 +17,19 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('posts', PostIndex::class)->name('posts.index');
-Route::get('posts/{post}', PostShow::class)->name('posts.show');
-Route::get('post/create', PostStore::class)->name('posts.store');
+
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('posts/{post}/comments', CommentStore::class)->name('posts.comments.store');
     Route::delete('posts/{post}/comments/{comment}', CommentDelete::class)->name('posts.comments.delete');
+
+    Route::get('posts/create', PostStore::class)->name('posts.store');
 });
 
+
+Route::get('posts', PostIndex::class)->name('posts.index');
+
+Route::get('posts/{post}', PostShow::class)->name('posts.show');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])

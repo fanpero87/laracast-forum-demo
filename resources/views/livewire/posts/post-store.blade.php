@@ -1,4 +1,4 @@
-<div>
+<div class="container mx-auto mt-8">
     <form method="POST" wire:submit="store">
         <flux:input
             wire:model="title"
