@@ -18,7 +18,7 @@ class PostStore extends Component
 
     public function store()
     {
-        $this->authorize('create', Auth::id());
+        // $this->authorize('create');
 
         $this->validate();
 

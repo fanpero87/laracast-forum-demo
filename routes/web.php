@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Resources\PostResource;
 use App\Livewire\Posts\PostShow;
 use App\Livewire\Posts\PostIndex;
 use App\Livewire\Posts\PostStore;
@@ -26,10 +27,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('posts/create', PostStore::class)->name('posts.store');
 });
 
-
 Route::get('posts', PostIndex::class)->name('posts.index');
 
-Route::get('posts/{post}', PostShow::class)->name('posts.show');
+Route::get('posts/{post}/{slug?}', PostShow::class)->name('posts.show');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
