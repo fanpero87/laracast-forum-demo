@@ -22,7 +22,7 @@ class PostResource extends JsonResource
             'updated_at' => $this->updated_at,
             'created_at' => $this->created_at,
             'routes' => [
-                'show' => $this->showRoute(),
+                'show' => $this->resource->showRoute(),
             ],
         ];
     }

@@ -10,5 +10,12 @@
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+{{-- AlpineJS SimpleMDE --}}
+{{-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/1.11/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/1.11/simplemde.min.js"></script> --}}
+
+{{-- TipTap Markdown Editor --}}
+{{-- <script type="module" src="resources/js/main.js"></script> --}}
+
+@vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/main.js'])
 @fluxAppearance

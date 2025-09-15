@@ -26,7 +26,7 @@ class PostShow extends Component
     #[Computed]
     public function post()
     {
-        return PostResource::make($this->post->with('user'));
+        return PostResource::make($this->post->load('user'));
     }
 
     #[Computed]

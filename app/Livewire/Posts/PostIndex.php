@@ -18,7 +18,7 @@ class PostIndex extends Component
     public function posts()
     {
         return PostResource::collection(
-            Post::latest()->paginate(10)
+            Post::with('user')->latest()->paginate(10)
         );
     }
 }
