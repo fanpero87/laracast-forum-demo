@@ -1,4 +1,15 @@
-<div>
+<div x-data="{
+        value: '# Write Some Markdown...',
+        init() {
+            let editor = new SimpleMDE({ element: this.$refs.editor })
+ 
+            editor.value(this.value)
+ 
+            editor.codemirror.on('change', () => {
+                this.value = editor.value()
+            })
+        },
+    }">
     <form method="POST" wire:submit="store">
         <flux:textarea wire:model="body" class="mt-2" rows="4"
             placeholder="{{ $commentBeingEdited ? 'Edit your comment...' : 'Add a comment...' }}"

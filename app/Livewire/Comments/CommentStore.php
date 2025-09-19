@@ -41,6 +41,7 @@ class CommentStore extends Component
     {
         Comment::create([
             'body' => $this->body,
+            'html' => $this->body,
             'user_id' => Auth::id(),
             'post_id' => $this->post->id,
         ]);

@@ -23,7 +23,7 @@ class PostShow extends Component
         $this->post = $post;
     }
 
-    #[Computed]
+    #[Computed(cache: true)]
     public function post()
     {
         return PostResource::make($this->post->load('user'));

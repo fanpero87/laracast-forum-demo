@@ -27,7 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('posts/create', PostStore::class)->name('posts.store');
 });
 
-Route::get('posts', PostIndex::class)->name('posts.index');
+Route::get('posts/{topic?}', PostIndex::class)->name('posts.index');
 
 Route::get('posts/{post}/{slug?}', PostShow::class)->name('posts.show');
 
