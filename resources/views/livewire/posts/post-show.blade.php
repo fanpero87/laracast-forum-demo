@@ -1,7 +1,9 @@
 <div class="container p-4 mx-auto">
     
+@if($post->topic)
     <flux:button wire:key="{{ $post->topic->id }}" :href="route('posts.index', [$post->topic->slug])" wire:navigate>{{
-            $post->topic->name }}</flux:button>
+                $post->topic->name }}</flux:button>
+@endif
             
     <h1 class="mt-4 text-2xl font-bold text-zinc-600 dark:text-white">{{ $this->post->title }}</h1>
     <span class="text-xs text-zinc-600 dark:text-white">{{ optional($this->post->created_at)->diffForHumans() }} by
