@@ -19,7 +19,7 @@ class Post extends Model
     use HasFactory;
     use ConvertsMarkdownToHtml;
 
-    protected $fillable = ['title', 'body', 'html', 'user_id'];
+    protected $fillable = ['title', 'body', 'html', 'topic_id', 'user_id'];
 
 
     public function user(): BelongsTo

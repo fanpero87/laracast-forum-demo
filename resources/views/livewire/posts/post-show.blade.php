@@ -1,18 +1,22 @@
-<div class="p-4">
-    <h1 class="text-2xl font-bold text-zinc-600 dark:text-white">{{ $this->post->title }}</h1>
+<div class="container p-4 mx-auto">
+    
+    <flux:button wire:key="{{ $post->topic->id }}" :href="route('posts.index', [$post->topic->slug])" wire:navigate>{{
+            $post->topic->name }}</flux:button>
+            
+    <h1 class="mt-4 text-2xl font-bold text-zinc-600 dark:text-white">{{ $this->post->title }}</h1>
     <span class="text-xs text-zinc-600 dark:text-white">{{ optional($this->post->created_at)->diffForHumans() }} by
         {{ optional($this->post->user)->name }}</span>
     <div class="mt-6 prose-sm prose max-w-none text-zinc-600 dark:text-white/70">
         {{$this->post->html}}
     </div>
 
-    <div class="px-4">
-        <h2 class="mt-4 text-xl font-bold text-zinc-600 dark:text-white">Comments</h2>
+    <div>
+        <h2 class="my-4 text-xl font-bold text-zinc-600 dark:text-white">Comments</h2>
         @auth
         <livewire:comments.comment-store :post="$this->post" />
         @endauth
 
-        <ul class="p-4 divide-y">
+        <ul class="divide-y">
             @foreach ($this->comments as $comment)
             <li class="grid px-2 py-4" wire:key="comment-{{ $comment->id }}">
                 <div class="flex items-start justify-between">
@@ -39,6 +43,5 @@
         </ul>
 
         {{ $this->comments->links() }}
-
     </div>
 </div>
