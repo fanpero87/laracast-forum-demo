@@ -2,9 +2,9 @@
         value: '# Write Some Markdown...',
         init() {
             let editor = new SimpleMDE({ element: this.$refs.editor })
- 
+
             editor.value(this.value)
- 
+
             editor.codemirror.on('change', () => {
                 this.value = editor.value()
             })
@@ -18,7 +18,7 @@
 
         <div class="flex justify-between gap-2 mt-4">
             <div class="flex">
-                <flux:button variant="primary" type="submit" color="zinc">
+                <flux:button variant="primary" type="submit">
                     {{ $commentBeingEdited ? 'Update Comment' : 'Add Comment' }}
                 </flux:button>
                 @if($commentBeingEdited)
