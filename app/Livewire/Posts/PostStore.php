@@ -36,7 +36,6 @@ class PostStore extends Component
         $post = Post::create([
             'title' => $this->title,
             'body' => $this->body,
-            'html' => $this->body,
             'topic_id' => $this->topic_id,
             'user_id' => Auth::id(),
         ]);

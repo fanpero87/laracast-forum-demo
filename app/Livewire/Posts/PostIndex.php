@@ -24,7 +24,6 @@ class PostIndex extends Component
     {
         $posts = Post::with(['user', 'topic'])
             ->when($this->topic, fn(Builder $query) => $query->whereBelongsTo($this->topic))
-            ->latest()
             ->latest('id')
             ->paginate(10);
 

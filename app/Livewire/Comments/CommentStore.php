@@ -39,9 +39,10 @@ class CommentStore extends Component
 
     private function createComment(): void
     {
+        $this->authorize('create', Comment::class);
+
         Comment::create([
             'body' => $this->body,
-            'html' => $this->body,
             'user_id' => Auth::id(),
             'post_id' => $this->post->id,
         ]);
@@ -58,6 +59,11 @@ class CommentStore extends Component
 
         $comment->update([
             'body' => $this->body,
+            'html' => str($this->body)->markdown([
+                'html_input' => 'strip',
+                'allow_unsafe_links' => false,
+                'max_nesting_level' => 5,
+            ]),
         ]);
 
         $this->message = 'Comment updated successfully!';
