@@ -10,9 +10,5 @@
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
-{{-- AlpineJS SimpleMDE --}}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/1.11/simplemde.min.css">
-<script src="https://cdn.jsdelivr.net/simplemde/1.11/simplemde.min.js"></script>
-
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 @fluxAppearance

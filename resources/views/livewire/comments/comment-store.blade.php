@@ -1,20 +1,11 @@
-<div x-data="{
-        value: '# Write Some Markdown...',
-        init() {
-            let editor = new SimpleMDE({ element: this.$refs.editor })
-
-            editor.value(this.value)
-
-            editor.codemirror.on('change', () => {
-                this.value = editor.value()
-            })
-        },
-    }">
+<div>
     <form method="POST" wire:submit="store">
-        <flux:textarea wire:model="body" class="mt-2" rows="4"
-            placeholder="{{ $commentBeingEdited ? 'Edit your comment...' : 'Add a comment...' }}"
-             />
-        <flux:error name="body" />
+
+        <flux:composer wire:model="body" rows="5" placeholder="{{ $commentBeingEdited ? 'Edit your comment...' : 'Add a comment...' }}">
+            <x-slot name="input">
+                <flux:editor variant="borderless" toolbar="bold italic bullet ordered | link | align" />
+            </x-slot>
+        </flux:composer>
 
         <div class="flex justify-between gap-2 mt-4">
             <div class="flex">

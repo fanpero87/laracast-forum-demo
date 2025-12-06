@@ -1,20 +1,13 @@
-<div x-data="{
-		    value: '# Write a Post..',
-		    init() {
-		        let editor = new SimpleMDE({ element: this.$refs.editor })
-
-		        editor.value(this.value)
-
-		        editor.codemirror.on('change', () => {
-		            this.value = editor.value()
-		        })
-		    },
-		}" class="container mx-auto mt-8">
+<div class="container mx-auto mt-8">
     <form method="POST" wire:submit="store" class="space-y-6">
         <h1 class="mt-4 text-2xl font-bold">Title</h1>
         <flux:input type="text" wire:model="title" required />
-        <flux:textarea wire:model="body" rows="4" />
-        <flux:error name="body" />
+
+        <flux:composer wire:model="body" rows="5" label:sr-only placeholder="How can I help you today?">
+            <x-slot name="input">
+                <flux:editor variant="borderless" toolbar="bold italic bullet ordered | link | align" />
+            </x-slot>
+        </flux:composer>
 
         <flux:select wire:model="topic_id" placeholder="Choose topic...">
         @foreach ($this->topics as $topic)

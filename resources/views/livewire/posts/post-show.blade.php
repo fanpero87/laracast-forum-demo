@@ -1,15 +1,16 @@
 <div class="container p-4 mx-auto">
-    
+
 @if($post->topic)
     <flux:button wire:key="{{ $post->topic->id }}" :href="route('posts.index', [$post->topic->slug])" wire:navigate>{{
-                $post->topic->name }}</flux:button>
+                $post->topic->name }}
+    </flux:button>
 @endif
-            
+
     <h1 class="mt-4 text-2xl font-bold text-zinc-600 dark:text-white">{{ $this->post->title }}</h1>
     <span class="text-xs text-zinc-600 dark:text-white">{{ optional($this->post->created_at)->diffForHumans() }} by
         {{ optional($this->post->user)->name }}</span>
     <div class="mt-6 prose-sm prose max-w-none text-zinc-600 dark:text-white/70">
-        {{$this->post->html}}
+        {!! $this->post->body !!}
     </div>
 
     <div>
@@ -23,7 +24,7 @@
             <li class="grid px-2 py-4" wire:key="comment-{{ $comment->id }}">
                 <div class="flex items-start justify-between">
                     <div class="flex-1">
-                        <span class="text-zinc-600 dark:text-white/70">{{ $comment->body }}</span>
+                        <span class="text-zinc-600 dark:text-white/70">{!! $comment->body !!}</span>
                         <span class="block mt-1 text-xs text-zinc-600 dark:text-white/70">By {{ $comment->user->name }}
                             {{ optional($comment->created_at)->diffForHumans() }} </span>
                     </div>
